@@ -1,10 +1,13 @@
 package com.cl.spring_mvc.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.cl.spring_mvc.dao.StudentDao;
@@ -27,9 +30,20 @@ public class StudentController {
 	@RequestMapping("savestudent")
 	public ModelAndView saveStudent(@ModelAttribute Student student) {
 		dao.saveStudent(student);
+		List<Student> list = dao.getAllStudent();
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("save.jsp");
+		modelAndView.addObject("std", list);
+		modelAndView.setViewName("view.jsp");
 		return modelAndView;
 	}
 
+	@RequestMapping("delete")
+	public ModelAndView deleteStudent(@RequestParam int id) {
+		dao.deleteStudent(id);//deleted student
+		List<Student> students = dao.getAllStudent();//fetching the list after deleting
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject("std", students);
+		modelAndView.setViewName("view.jsp");
+		return modelAndView;
+	}
 }
