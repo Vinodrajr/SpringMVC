@@ -39,11 +39,33 @@ public class StudentController {
 
 	@RequestMapping("delete")
 	public ModelAndView deleteStudent(@RequestParam int id) {
-		dao.deleteStudent(id);//deleted student
-		List<Student> students = dao.getAllStudent();//fetching the list after deleting
+		dao.deleteStudent(id);// deleted student
+		List<Student> students = dao.getAllStudent();// fetching the list after deleting
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.addObject("std", students);
 		modelAndView.setViewName("view.jsp");
 		return modelAndView;
+	}
+
+	@RequestMapping("edit")
+	public ModelAndView editStudent(@RequestParam int id) {
+
+		Student student = dao.getbyID(id);
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject("student", student);
+		modelAndView.setViewName("edit.jsp");
+		return modelAndView;
+
+	}
+
+	@RequestMapping("updatestudent")
+	public ModelAndView viewStudent(@ModelAttribute Student student) {
+		dao.updateStudnet(student);
+		List<Student> students = dao.getAllStudent();// fetching the list after deleting
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject("std", students);
+		modelAndView.setViewName("view.jsp");
+		return modelAndView;
+
 	}
 }

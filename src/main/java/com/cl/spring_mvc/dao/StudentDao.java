@@ -37,4 +37,15 @@ public class StudentDao {
 		transaction.commit();
 	}
 
+	public Student getbyID(int id) {
+		return manager.find(Student.class, id);
+	}
+
+	public void updateStudnet(Student student) {
+		EntityTransaction transaction = manager.getTransaction();
+		transaction.begin();
+		manager.merge(student);
+		transaction.commit();
+	}
+
 }

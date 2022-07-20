@@ -15,6 +15,7 @@
 			<th>Std</th>
 			<th>School</th>
 			<th>Delete</th>
+			<th>Edit</th>
 		</tr>
 		<c:forEach items="${std}" var="student">
 			<tr>
@@ -23,6 +24,7 @@
 				<td>${student.std}</td>
 				<td>${student.school}</td>
 				<td><a href="delete?id=${student.id}">delete</a></td>
+				<td><a href="edit?id=${student.id}">edit</a></td>
 			</tr>
 		</c:forEach>
 
